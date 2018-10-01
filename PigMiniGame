@@ -1,0 +1,53 @@
+    private void onMount(){
+        //Saves!!!! Udělat zprávu!!!!
+
+        Location spawn = Main.getPlugin().gettingFromConfig("map.gameCenter");
+        float saddlepigs = Bukkit.getOnlinePlayers().size() / 4;
+        int emptypigs = Bukkit.getOnlinePlayers().size() * 3;
+
+        for (int i = 0; i <= saddlepigs; i++){
+            Pig pig = (Pig) Bukkit.getWorld("mapa").spawnEntity(spawn, EntityType.PIG);
+            pig.setSaddle(true);
+        }
+
+        for (int i = 0; i <= emptypigs; i++){
+            Pig pig = (Pig) Bukkit.getWorld("mapa").spawnEntity(spawn, EntityType.PIG);
+            pig.setSaddle(false);
+        }
+    }
+
+    @EventHandler
+    public void onMount(EntityMountEvent e){
+        Player p = (Player) e.getEntity();
+        Entity entity = e.getMount();
+
+        if (e.getEntity() instanceof Player){
+            if (entity.getType() == EntityType.PIG){
+                Main.getPlugin().getUsed().add(p.getName());
+
+                //Saves!!!! Udělat přidání bodu!!!!
+            }
+        }
+    }
+
+    @EventHandler
+    public void onDismount(EntityDismountEvent e){
+        Player p = (Player) e.getEntity();
+        Entity entity = e.getDismounted();
+
+        if (e.getEntity() instanceof Player){
+            if (Main.getPlugin().getUsed().contains(p.getName())) {
+                Main.getPlugin().getServer().getScheduler().runTaskLater(Main.getPlugin(), () -> entity.setPassenger(p),1);
+            }
+        }
+    }
+
+    @EventHandler
+    public void onDamage(EntityDamageByEntityEvent e){
+        Player p = (Player) e.getDamager();
+        Entity entity = e.getEntity();
+
+        if (e.getDamager() instanceof Player){
+            e.setCancelled(true);
+        }
+    }
