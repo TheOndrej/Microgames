@@ -44,10 +44,12 @@
 
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent e){
-        Player p = (Player) e.getDamager();
-        Entity entity = e.getEntity();
 
+        if (Main.getPlugin().getMinigame().contains("spleef") || Main.getPlugin().getMinigame().contains("pig"))
         if (e.getDamager() instanceof Player){
             e.setCancelled(true);
+        } else {
+            return;
         }
+
     }
