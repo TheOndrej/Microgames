@@ -33,46 +33,50 @@ public class Spleef implements Listener{
     }
 
     @EventHandler
-    public void onDestroy(BlockBreakEvent e){
+    public void onDestroy(PlayerInteractEvent e){
         Player p = e.getPlayer();
 
-        if (Main.getPlugin().getMinigame().contains("spleef")) {
-            e.getBlock().getDrops().clear();
-            Location blockLocation = e.getBlock().getLocation();
+        if (p.getInventory().getItemInMainHand().getType() == Material.IRON_SPADE){
+            if (e.getAction() != Action.RIGHT_CLICK_AIR || e.getAction() != Action.LEFT_CLICK_AIR) {
+                e.getClickedBlock().getDrops().clear();
+                Location blockLocation = e.getClickedBlock().getLocation();
 
-            p.getWorld().spawnParticle(Particle.CLOUD, blockLocation, 50);
+                p.getWorld().spawnParticle(Particle.CLOUD, blockLocation, 50);
 
-            if (e.getBlock().getType() == Material.TNT) {
-                Location locDestroy1 = new Location(blockLocation.getWorld(), blockLocation.getBlockX(), blockLocation.getBlockY(), blockLocation.getBlockZ() - 1);
-                Location locDestroy2 = new Location(blockLocation.getWorld(), blockLocation.getBlockX(), blockLocation.getBlockY(), blockLocation.getBlockZ() + 1);
-                Location locDestroy3 = new Location(blockLocation.getWorld(), blockLocation.getBlockX() - 1, blockLocation.getBlockY(), blockLocation.getBlockZ());
-                Location locDestroy4 = new Location(blockLocation.getWorld(), blockLocation.getBlockX() + 1, blockLocation.getBlockY(), blockLocation.getBlockZ());
-                Location locDestroy5 = new Location(blockLocation.getWorld(), blockLocation.getBlockX() + 1, blockLocation.getBlockY(), blockLocation.getBlockZ() + 1);
-                Location locDestroy6 = new Location(blockLocation.getWorld(), blockLocation.getBlockX() - 1, blockLocation.getBlockY(), blockLocation.getBlockZ() + 1);
-                Location locDestroy7 = new Location(blockLocation.getWorld(), blockLocation.getBlockX() - 1, blockLocation.getBlockY(), blockLocation.getBlockZ() - 1);
-                Location locDestroy8 = new Location(blockLocation.getWorld(), blockLocation.getBlockX() + 1, blockLocation.getBlockY(), blockLocation.getBlockZ() - 1);
+                if (e.getClickedBlock().getType() == Material.TNT) {
+                    Location locDestroy1 = new Location(blockLocation.getWorld(), blockLocation.getBlockX(), blockLocation.getBlockY(), blockLocation.getBlockZ() - 1);
+                    Location locDestroy2 = new Location(blockLocation.getWorld(), blockLocation.getBlockX(), blockLocation.getBlockY(), blockLocation.getBlockZ() + 1);
+                    Location locDestroy3 = new Location(blockLocation.getWorld(), blockLocation.getBlockX() - 1, blockLocation.getBlockY(), blockLocation.getBlockZ());
+                    Location locDestroy4 = new Location(blockLocation.getWorld(), blockLocation.getBlockX() + 1, blockLocation.getBlockY(), blockLocation.getBlockZ());
+                    Location locDestroy5 = new Location(blockLocation.getWorld(), blockLocation.getBlockX() + 1, blockLocation.getBlockY(), blockLocation.getBlockZ() + 1);
+                    Location locDestroy6 = new Location(blockLocation.getWorld(), blockLocation.getBlockX() - 1, blockLocation.getBlockY(), blockLocation.getBlockZ() + 1);
+                    Location locDestroy7 = new Location(blockLocation.getWorld(), blockLocation.getBlockX() - 1, blockLocation.getBlockY(), blockLocation.getBlockZ() - 1);
+                    Location locDestroy8 = new Location(blockLocation.getWorld(), blockLocation.getBlockX() + 1, blockLocation.getBlockY(), blockLocation.getBlockZ() - 1);
 
+                    Material air = Material.AIR;
+                    blockLocation.getBlock().setType(air);
+                    locDestroy1.getBlock().setType(air);
+                    locDestroy2.getBlock().setType(air);
+                    locDestroy3.getBlock().setType(air);
+                    locDestroy4.getBlock().setType(air);
+                    locDestroy5.getBlock().setType(air);
+                    locDestroy6.getBlock().setType(air);
+                    locDestroy7.getBlock().setType(air);
+                    locDestroy8.getBlock().setType(air);
+
+                    p.getWorld().spawnParticle(Particle.CLOUD, locDestroy1, 10);
+                    p.getWorld().spawnParticle(Particle.CLOUD, locDestroy2, 10);
+                    p.getWorld().spawnParticle(Particle.CLOUD, locDestroy3, 10);
+                    p.getWorld().spawnParticle(Particle.CLOUD, locDestroy4, 10);
+                    p.getWorld().spawnParticle(Particle.CLOUD, locDestroy5, 10);
+                    p.getWorld().spawnParticle(Particle.CLOUD, locDestroy6, 10);
+                    p.getWorld().spawnParticle(Particle.CLOUD, locDestroy7, 10);
+                    p.getWorld().spawnParticle(Particle.CLOUD, locDestroy8, 10);
+                }
                 Material air = Material.AIR;
-                locDestroy1.getBlock().setType(air);
-                locDestroy2.getBlock().setType(air);
-                locDestroy3.getBlock().setType(air);
-                locDestroy4.getBlock().setType(air);
-                locDestroy5.getBlock().setType(air);
-                locDestroy6.getBlock().setType(air);
-                locDestroy7.getBlock().setType(air);
-                locDestroy8.getBlock().setType(air);
-
-                p.getWorld().spawnParticle(Particle.CLOUD, locDestroy1, 10);
-                p.getWorld().spawnParticle(Particle.CLOUD, locDestroy2, 10);
-                p.getWorld().spawnParticle(Particle.CLOUD, locDestroy3, 10);
-                p.getWorld().spawnParticle(Particle.CLOUD, locDestroy4, 10);
-                p.getWorld().spawnParticle(Particle.CLOUD, locDestroy5, 10);
-                p.getWorld().spawnParticle(Particle.CLOUD, locDestroy6, 10);
-                p.getWorld().spawnParticle(Particle.CLOUD, locDestroy7, 10);
-                p.getWorld().spawnParticle(Particle.CLOUD, locDestroy8, 10);
+                blockLocation.getBlock().setType(air);
             }
-                            blockLocation.getBlock().setType(air);
-        }
+            }
     }
 
     @EventHandler
