@@ -53,7 +53,6 @@ public class Spleef implements Listener{
                 Location locDestroy8 = new Location(blockLocation.getWorld(), blockLocation.getBlockX() + 1, blockLocation.getBlockY(), blockLocation.getBlockZ() - 1);
 
                 Material air = Material.AIR;
-                blockLocation.getBlock().setType(air);
                 locDestroy1.getBlock().setType(air);
                 locDestroy2.getBlock().setType(air);
                 locDestroy3.getBlock().setType(air);
@@ -72,6 +71,7 @@ public class Spleef implements Listener{
                 p.getWorld().spawnParticle(Particle.CLOUD, locDestroy7, 10);
                 p.getWorld().spawnParticle(Particle.CLOUD, locDestroy8, 10);
             }
+                            blockLocation.getBlock().setType(air);
         }
     }
 
