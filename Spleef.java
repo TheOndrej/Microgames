@@ -33,11 +33,15 @@ public class Spleef implements Listener{
     }
 
     @EventHandler
-    public void onDestroy(PlayerInteractEvent e){
+    public void onDestroy(PlayerInteractEvent e) {
         Player p = e.getPlayer();
 
-        if (p.getInventory().getItemInMainHand().getType() == Material.IRON_SPADE){
-            if (e.getAction() != Action.RIGHT_CLICK_AIR || e.getAction() != Action.LEFT_CLICK_AIR) {
+        if (p.getInventory().getItemInMainHand().getType() == Material.IRON_SPADE) {
+            if (e.getAction() == Action.RIGHT_CLICK_AIR) {
+                return;
+            } else if (e.getAction() == Action.LEFT_CLICK_AIR) {
+                return;
+            } else {
                 e.getClickedBlock().getDrops().clear();
                 Location blockLocation = e.getClickedBlock().getLocation();
 
@@ -76,7 +80,7 @@ public class Spleef implements Listener{
                 Material air = Material.AIR;
                 blockLocation.getBlock().setType(air);
             }
-            }
+        }
     }
 
     @EventHandler
