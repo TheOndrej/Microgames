@@ -1,0 +1,53 @@
+package me.TheOndra.MicroGames.Games;
+
+import me.TheOndra.MicroGames.Main;
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.inventory.ItemStack;
+
+public class BuildMaster implements Listener{
+
+    private void onEnd(){
+        //!!! Savesi, přidat ukončovací metodu !!!
+    }
+
+    private void onStart(){
+        for (Player players : Bukkit.getOnlinePlayers()){
+            //!!! Savesi, dodělat zprávu !!!
+
+            ItemStack ironBlocks = new ItemStack(Material.IRON_BLOCK, 5);
+            ItemStack ironBlocks2 = new ItemStack(Material.IRON_BLOCK, 3);
+            ItemStack ironBlocks3 = new ItemStack(Material.IRON_BLOCK, 2);
+            ItemStack ironBlocks4 = new ItemStack(Material.IRON_BLOCK,4);
+            ItemStack ironBlocks5 = new ItemStack(Material.IRON_BLOCK,5);
+            ItemStack ironBlocks6 = new ItemStack(Material.IRON_BLOCK, 2);
+            ItemStack ironBlocks7 = new ItemStack(Material.IRON_BLOCK, 3);
+
+
+            players.getInventory().setItem(1, ironBlocks);
+            players.getInventory().setItem(5, ironBlocks2);
+            players.getInventory().setItem(10, ironBlocks3);
+            players.getInventory().setItem(13, ironBlocks4);
+            players.getInventory().setItem(19, ironBlocks5);
+            players.getInventory().setItem(24, ironBlocks6);
+            players.getInventory().setItem(25, ironBlocks7);
+
+        }
+
+        Bukkit.getScheduler().runTaskLater(Main.getPlugin(), () -> this.onEnd(), 20*30);
+    }
+
+    @EventHandler
+    public void onPlace(BlockPlaceEvent e){
+        Player p = e.getPlayer();
+
+        if (e.getBlock().getLocation().getBlockY() == 150){
+            p.getInventory().clear();
+            //!!! Savesi, dodělat přidání bodů !!!
+        }
+    }
+}
