@@ -1,0 +1,218 @@
+package me.TheOndra.MicroGames.Games;
+
+import me.TheOndra.MicroGames.Main;
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.CraftItemEvent;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+
+import java.util.HashMap;
+import java.util.Random;
+
+public class CraftItem implements Listener, CommandExecutor{
+
+    HashMap<Integer, Inventory> items = new HashMap<Integer, Inventory>();
+    HashMap<Integer, String> itemsString = new HashMap<Integer, String>();
+
+    private void onPut(){
+        Inventory inv = Bukkit.createInventory(null, 36);
+        ItemStack invStack = new ItemStack(Material.COBBLESTONE,6);
+        ItemStack invStack2 = new ItemStack(Material.REDSTONE,2);
+        ItemStack invStack3 = new ItemStack(Material.QUARTZ);
+        inv.addItem(invStack);
+        inv.addItem(invStack2);
+        inv.addItem(invStack3);
+        items.put(0,inv);
+        itemsString.put(0,"Observer");
+        ItemStack observer = new ItemStack(Material.OBSERVER);
+        Main.getPlugin().getItemsStack().put(0, observer);
+
+        Inventory inv1 = Bukkit.createInventory(null, 36);
+        ItemStack inv1Stack = new ItemStack(Material.STICK,2);
+        ItemStack inv1Stack2 = new ItemStack(Material.WOOD,2);
+        inv1.addItem(inv1Stack);
+        inv1.addItem(inv1Stack2);
+        items.put(1, inv1);
+        itemsString.put(1, "Dřevěnou motyku");
+        ItemStack hoe = new ItemStack(Material.WOOD_HOE);
+        Main.getPlugin().getItemsStack().put(1, hoe);
+
+        Inventory inv2 = Bukkit.createInventory(null, 36);
+        ItemStack inv2Stack = new ItemStack(Material.PUMPKIN);
+        ItemStack inv2Stack2 = new ItemStack(Material.TORCH);
+        inv2.addItem(inv2Stack);
+        inv2.addItem(inv2Stack2);
+        items.put(2, inv2);
+        itemsString.put(2, "Svítící dýni");
+        ItemStack jack = new ItemStack(Material.JACK_O_LANTERN);
+        Main.getPlugin().getItemsStack().put(2, jack);
+
+        Inventory inv3 = Bukkit.createInventory(null, 36);
+        ItemStack inv3Stack = new ItemStack(Material.FEATHER);
+        ItemStack inv3Stack2 = new ItemStack(Material.INK_SACK);
+        ItemStack inv3Stack3 = new ItemStack(Material.BOOK);
+        inv3.addItem(inv3Stack);
+        inv3.addItem(inv3Stack2);
+        inv3.addItem(inv3Stack3);
+        items.put(3, inv3);
+        itemsString.put(3, "Knihu, do které můžeš psát");
+        ItemStack book = new ItemStack(Material.BOOK_AND_QUILL);
+        Main.getPlugin().getItemsStack().put(3, book);
+
+        Inventory inv4 = Bukkit.createInventory(null, 36);
+        ItemStack inv4Stack = new ItemStack(Material.WOOD,6);
+        ItemStack inv4Stack2 = new ItemStack(Material.BOOK,3);
+        inv4.addItem(inv4Stack);
+        inv4.addItem(inv4Stack2);
+        items.put(4, inv4);
+        itemsString.put(4, "Knihovnu");
+        ItemStack bookShelf = new ItemStack(Material.BOOKSHELF);
+        Main.getPlugin().getItemsStack().put(4, bookShelf);
+
+        Inventory inv5 = Bukkit.createInventory(null, 36);
+        ItemStack inv5Stack = new ItemStack(Material.SLIME_BALL,9);
+        inv5.addItem(inv5Stack);
+        items.put(5, inv5);
+        itemsString.put(5, "Slime block");
+        ItemStack slime = new ItemStack(Material.SLIME_BLOCK);
+        Main.getPlugin().getItemsStack().put(5, slime);
+
+        Inventory inv6 = Bukkit.createInventory(null, 36);
+        ItemStack inv6stack = new ItemStack(Material.IRON_INGOT,7);
+        inv6.addItem(inv6stack);
+        items.put(6, inv6);
+        itemsString.put(6, "Kotel");
+        ItemStack cauldron = new ItemStack(Material.CAULDRON_ITEM);
+        Main.getPlugin().getItemsStack().put(6, cauldron);
+
+        Inventory inv7 = Bukkit.createInventory(null, 36);
+        ItemStack inv7Stack = new ItemStack(Material.LEATHER,5);
+        inv7.addItem(inv7Stack);
+        items.put(7, inv7);
+        itemsString.put(7, "Koženou helmu");
+        ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
+        Main.getPlugin().getItemsStack().put(7, helmet);
+
+        Inventory inv8 = Bukkit.createInventory(null, 36);
+        ItemStack inv8Stack = new ItemStack(Material.LEATHER, 8);
+        inv8.addItem(inv8Stack);
+        items.put(8, inv8);
+        itemsString.put(8, "Kožené brnění");
+        ItemStack chestplate = new ItemStack(Material.LEATHER_CHESTPLATE);
+        Main.getPlugin().getItemsStack().put(8, chestplate);
+
+        Inventory inv9 = Bukkit.createInventory(null, 36);
+        ItemStack inv9Stack = new ItemStack(Material.LEATHER, 7);
+        inv9.addItem(inv9Stack);
+        items.put(9, inv9);
+        itemsString.put(9, "Kožené kalhoty");
+        ItemStack leggins = new ItemStack(Material.LEATHER_LEGGINGS);
+        Main.getPlugin().getItemsStack().put(9, leggins);
+
+        Inventory inv10 = Bukkit.createInventory(null, 36);
+        ItemStack inv10Stack = new ItemStack(Material.LEATHER, 4);
+        inv10.addItem(inv10Stack);
+        items.put(10, inv10);
+        itemsString.put(10, "Kožené boty");
+        ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
+        Main.getPlugin().getItemsStack().put(10, boots);
+
+        Inventory inv11 = Bukkit.createInventory(null, 36);
+        ItemStack inv11Stack = new ItemStack(Material.STICK,8);
+        ItemStack inv11Stack2 = new ItemStack(Material.WOOL);
+        inv11.addItem(inv11Stack);
+        inv11.addItem(inv11Stack2);
+        items.put(11, inv11);
+        itemsString.put(11, "Obraz");
+        ItemStack painting = new ItemStack(Material.PAINTING);
+        Main.getPlugin().getItemsStack().put(11, painting);
+
+        Inventory inv12 = Bukkit.createInventory(null, 36);
+        ItemStack inv12Stack = new ItemStack(Material.WHEAT,9);
+        inv12.addItem(inv12Stack);
+        items.put(12, inv12);
+        itemsString.put(12, "Balík slámy");
+        ItemStack hay = new ItemStack(Material.HAY_BLOCK);
+        Main.getPlugin().getItemsStack().put(12, hay);
+
+        Inventory inv13 = Bukkit.createInventory(null, 36);
+        ItemStack inv13Stack = new ItemStack(Material.FEATHER);
+        ItemStack inv13Stack2 = new ItemStack(Material.STICK);
+        ItemStack inv13Stack3 = new ItemStack(Material.FLINT);
+        inv13.addItem(inv13Stack);
+        inv13.addItem(inv13Stack2);
+        inv13.addItem(inv13Stack3);
+        items.put(13, inv13);
+        itemsString.put(13, "Šíp");
+        ItemStack arrow = new ItemStack(Material.ARROW);
+        Main.getPlugin().getItemsStack().put(13, arrow);
+
+        Inventory inv14 = Bukkit.createInventory(null, 36);
+        ItemStack inv14Stack = new ItemStack(Material.COBBLESTONE);
+        ItemStack inv14Stack2 = new ItemStack(Material.VINE);
+        inv14.addItem(inv14Stack);
+        inv14.addItem(inv14Stack2);
+        items.put(14, inv14);
+        itemsString.put(14, "Kámen porostlý mechem");
+        ItemStack cobble = new ItemStack(Material.MOSSY_COBBLESTONE);
+        Main.getPlugin().getItemsStack().put(14, cobble);
+
+    }
+
+    private void onEnd(){
+        //!!! Savesi, Přidat ukončovací metodu + clear inv!!!
+    }
+
+    private int onRandomInt(){
+        Random random = new Random();
+
+        int i = random.nextInt(14);
+
+        return i;
+    }
+
+    private void onStart() {
+        onPut();
+
+        int number = onRandomInt();
+        Main.getPlugin().setNumber(number);
+
+        Bukkit.getScheduler().runTaskLater(Main.getPlugin(), () -> this.onEnd(), 20 * 15);
+
+        for (Player players : Bukkit.getOnlinePlayers()) {
+            players.openWorkbench(null, true);
+
+            Inventory getInventory = items.get(number);
+            players.getInventory().setContents(getInventory.getContents());
+
+            players.sendMessage("§cZadávám Ti za úkol vykrafit: §7§l" + itemsString.get(number));
+        }
+    }
+
+    @EventHandler
+    public void onCraft(CraftItemEvent e){
+        Player p = (Player) e.getWhoClicked();
+
+        ItemStack item = e.getRecipe().getResult();
+        item.setAmount(1);
+
+        if (item.getType() == Main.getPlugin().getItemsStack().get(Main.getPlugin().getNumber()).getType()){
+            //!!! Savesi, udělat přidání bodů !!!
+        }
+    }
+
+    @Override
+    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
+        if (commandSender instanceof Player){
+            onStart();
+        }
+        return true;
+    }
+}
