@@ -3,23 +3,25 @@ package me.TheOndra.MicroGames.Games;
 import me.TheOndra.MicroGames.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.CraftItemEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
-public class CraftItem implements Listener, CommandExecutor{
+public class CraftItem implements Listener{
 
     HashMap<Integer, Inventory> items = new HashMap<Integer, Inventory>();
     HashMap<Integer, String> itemsString = new HashMap<Integer, String>();
+    List<Player> playerList = new ArrayList<Player>();
 
     private void onPut(){
         Inventory inv = Bukkit.createInventory(null, 36);
@@ -168,6 +170,10 @@ public class CraftItem implements Listener, CommandExecutor{
 
     private void onEnd(){
         //!!! Savesi, Přidat ukončovací metodu + clear inv!!!
+        for (Player players : Bukkit.getOnlinePlayers()){
+            playerList.remove(players);
+            players.closeInventory();
+        }
     }
 
     private int onRandomInt(){
@@ -193,6 +199,7 @@ public class CraftItem implements Listener, CommandExecutor{
             players.getInventory().setContents(getInventory.getContents());
 
             players.sendMessage("§cZadávám Ti za úkol vykrafit: §7§l" + itemsString.get(number));
+            playerList.add(players);
         }
     }
 
@@ -205,14 +212,19 @@ public class CraftItem implements Listener, CommandExecutor{
 
         if (item.getType() == Main.getPlugin().getItemsStack().get(Main.getPlugin().getNumber()).getType()){
             //!!! Savesi, udělat přidání bodů !!!
+            playerList.remove(p);
+            p.getInventory().clear();
+            p.closeInventory();
         }
     }
 
-    @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        if (commandSender instanceof Player){
-            onStart();
+    @EventHandler
+    public void onClose(InventoryCloseEvent e){
+        Player p = (Player) e.getPlayer();
+        if (p.getInventory().getType() == InventoryType.WORKBENCH){
+            if (playerList.contains(p)) {
+                e.getPlayer().openWorkbench(null, true);
+            }
         }
-        return true;
     }
 }
